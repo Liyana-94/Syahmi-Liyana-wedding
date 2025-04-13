@@ -11,7 +11,7 @@
   <meta property="og:image" content="https://liyana-94.github.io/Syahmi-Liyana-wedding/thumbnail.jpg" />
   <meta property="og:url" content="https://liyana-94.github.io/Syahmi-Liyana-wedding/" />
   <meta name="twitter:card" content="summary_large_image">
-
+  
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,21 +45,52 @@
       margin-top: 20px;
       border-radius: 10px;
     }
-    button {
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
       margin-top: 20px;
+      border-radius: 10px;
+    }
+    #countdown {
+      font-size: 1.5em;
+      color: #a52a2a;
+      text-align: center;
+      margin: 20px 0;
+    }
+    form {
+      margin-top: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background-color: #8B0000;
+      color: #fff;
       padding: 10px 20px;
-      background-color: #4caf50;
-      color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #45a049;
+    form button:hover {
+      background-color: #a52a2a;
     }
   </style>
 </head>
 <body>
+  <audio autoplay loop hidden>
+    <source src="background_music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <h1>JEMPUTAN MAJLIS PERKAHWINAN</h1>
   <p class="center">‎ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
   <p class="center"><strong>Salam Sejahtera</strong></p>
@@ -81,7 +112,15 @@
 
   <p><strong>Aturcara Majlis:</strong> 11:00 pagi – 4:00 petang</p>
 
+  <div id="countdown"></div>
+
   <p>Semoga dengan kehadiran anda dapat menyerikan lagi majlis kami dan diberkati Allah S.W.T.</p>
+
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15928.802298690785!2d101.5603424!3d3.0700505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4c69ef7f275f%3A0xf8393d1f4ce4fae6!2sDewan%20Anggerik%20MBSA%20Glenmarie!5e0!3m2!1sen!2smy!4v1713000000000!5m2!1sen!2smy" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  <p class="center">
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Dewan+Anggerik+Glenmarie" target="_blank">Buka Navigasi di Google Maps</a>
+  </p>
 
   <p class="center">
     <a href="Syahmi_Liyana_Invitation.pdf" target="_blank">Muat Turun Kad Jemputan (PDF)</a>
@@ -92,14 +131,36 @@
     Maaf, pelayar anda tidak menyokong elemen video.
   </video>
 
-  <div class="center">
-    <button onclick="document.getElementById('bg-music').play()">Mainkan Muzik Latar</button>
-  </div>
-  <audio id="bg-music">
-    <source src="background_music.mp3" type="audio/mpeg">
-    Pelayar anda tidak menyokong elemen audio.
-  </audio>
+  <form name="rsvp" method="POST" data-netlify="true">
+    <h3 class="center">RSVP</h3>
+    <input type="text" name="name" placeholder="Nama Anda" required>
+    <input type="email" name="email" placeholder="Email (jika ada)">
+    <textarea name="message" placeholder="Ucapan / Kehadiran" required></textarea>
+    <button type="submit">Hantar</button>
+  </form>
 
   <p class="center">Sekian, terima kasih.</p>
+
+  <script>
+    const countDownDate = new Date("May 25, 2025 11:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    const x = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = "Countdown: " + days + "h " + hours + "j " + minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval(x);
+        countdownEl.innerHTML = "Majlis sedang berlangsung atau telah selesai.";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
